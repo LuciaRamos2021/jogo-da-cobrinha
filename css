@@ -1,0 +1,10 @@
+corpo {
+    altura :  95 vh ;
+    largura :  95 vw ;
+    exibição : flexível;
+    flex-direction : coluna;
+    justificar-conteúdo : centro;
+    align-items : centro;
+    cor de fundo : branco;
+    cor :  rgb ( 52 ,  165 ,  52 );
+}
