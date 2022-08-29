@@ -1,0 +1,83 @@
+deixe  tela  =  documento . getElementById ( "serpente" ) ;  //criar elemento que irá rodar o jogo
+deixe  context  =  canvas . getContext ( "2d" ) ;  //....
+deixe  caixa  =  32 ;
+deixe  cobra  =  [ ] ;  //criar como lista, já que ela vai ser uma série de coordenadas, que quando pintadas, projetadas os quadradinhos
+cobra [ 0 ]  = {
+    x : 8  *  caixa ,
+    y : 8  *  caixa
+}
+deixe  direção  =  "direita" ;
+deixe  comida  = {
+    x : matemática . andar ( Math . random ( )  *  15  +  1 )  *  box ,
+    y : Matemática . andar ( Math . random ( )  *  15  +  1 )  *  box
+}
+
+função  criarBG ( ) {
+    contexto . fillStyle  =  "verde-claro" ;
+    contexto . fillRect ( 0,0,16 * caixa ,  16 * caixa ) ; _ _  _ _ //desenha altura o usando se xeyea largura etadas  
+}
+
+função  criarCobrinha  ( ) {
+    for ( i  =  0 ;  i  <  cobra . comprimento ;  i ++ ) {
+        contexto . fillStyle  =  "verde" ;
+        contexto . fillRect ( cobra [ i ] . x ,  cobra [ i ] . y ,  caixa ,  caixa ) ;
+    }
+}
+
+função  desenharAlimento  ( ) {
+    contexto . fillStyle  =  "vermelho" ;
+    contexto . fillRect ( comida . x ,  comida . y ,  caixa ,  caixa ) ;
+}
+
+//quando um evento acontece, detecta e chama uma função
+documento . addEventListener ( 'keydown' ,  update ) ;
+
+ atualização de função ( evento ) {
+    if ( event . keyCode  ==  37  &&  direction  !=  'right' )  direction  =  'left' ;
+    if ( event . keyCode  ==  38  &&  direction  !=  'down' )  direction  =  'up' ;
+    if ( event . keyCode  ==  39  &&  direction  !=  'left' )  direction  =  'right' ;
+    if ( event . keyCode  ==  40  &&  direction  !=  'up' )  direction  =  'down' ;
+}
+
+função  iniciarJogo ( ) {    
+
+    if ( snake [ 0 ] . x  >  15 * box  &&  direction  ==  "right" )  snake [ 0 ] . x  =  0 ;
+    if ( snake [ 0 ] . x  <  0  &&  direction  ==  'left' )  snake [ 0 ] . x  =  16  *  caixa ;
+    if ( snake [ 0 ] . y  >  15 * box  &&  direction  ==  "down" )  snake [ 0 ] . y  =  0 ;
+    if ( snake [ 0 ] . y  <  0  &&  direction  ==  'up' )  snake [ 0 ] . y  =  16  *  caixa ;
+    
+    for ( i  =  1 ;  i  <  cobra . comprimento ;  i ++ ) {
+        if ( cobra [ 0 ] . x  ==  cobra [ i ] . x  &&  cobra [ 0 ] . y  ==  cobra [ i ] . y ) {
+            clearInterval ( jogo ) ;
+            alert ( 'Fim do jogo :(' ) ;
+        }
+    }
+
+    criarBG ( ) ;
+    criarCobrinha ( ) ;
+    desenharAlimento ( ) ;
+
+    deixe  cobraX  =  cobra [ 0 ] . x ;
+    deixe  cobraY  =  cobra [ 0 ] . e ;
+
+    if ( direção  ==  "direita" )  snakeX  +=  box ;
+    if ( direção  ==  "esquerda" )  snakeX  -=  box ;
+    if  ( direção  ==  "para cima" )  snakeY  -=  box ;
+    if ( direção  ==  "para baixo" )  snakeY  +=  box ;
+
+    if ( cobraX  !=  comida . x  ||  cobraY  !=  comida . y ) {
+        cobra . pop ( ) ;  //pop tira o último elemento da lista
+    } senão {
+        comida . x  =  matemática . andar ( Math . random ( )  *  15  + 1 )  *  box ;
+        comida . y  =  matemática . andar ( Math . random ( )  *  15  + 1 )  *  box ;
+    }
+    
+    deixe  novaCabeça  = {
+        x : cobraX ,
+        y : cobraY
+    }
+
+    cobra . unshift ( newHead ) ;  //método unshift adicionar como primeiro quadradinho da cobrinha
+}
+
+let  jogo  =  setInterval ( iniciarJogo ,  100 ) ;
